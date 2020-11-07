@@ -1,0 +1,34 @@
+POKEMON
+id,
+name,
+order,
+weight,
+height,
+base experience,
+moves[]
+	move 
+		name,url,
+stats[]
+	base_stat
+	effort
+	stat
+		name,url,
+types[]
+	slot
+	type
+		name,url,
+sprites
+	back_default
+	back_female
+	back_shiny
+	back_shiny_female
+	front_default
+	front_female
+	front_shiny
+	front_shiny_female
+	other
+		dream_world
+			front_default
+			front_female
+		official-artwork
+			front_default
