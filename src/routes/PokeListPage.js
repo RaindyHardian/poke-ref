@@ -1,11 +1,12 @@
 import React from 'react'
 import PokeList from '../features/PokeList/PokeList';
+import Page from '../components/Page';
 
 const PokeListPage = () => {
   return (
-    <div>
+    <Page>
       <PokeList/>
-    </div>
+    </Page>
   )
 }
 

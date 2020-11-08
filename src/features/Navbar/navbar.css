@@ -1,0 +1,38 @@
+.navbar__container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 50px;
+  align-items: center;
+}
+.navbar__logo{
+  display: flex;
+  align-items: center;
+}
+.navbar__icon{
+  object-fit: contain;
+  width: 25px;
+  margin-right: 5px;
+}
+.navbar__name{
+  font-weight: bold;
+}
+.navbar__link{
+  text-decoration: none;
+  color: rgb(58, 58, 58);
+}
+.navbar__link:hover{
+  cursor: pointer;
+  color: black;
+}
+.navbar__active{
+  color: black;
+  font-weight: bold;
+}
+.navbar__list{
+  display: flex;
+  flex-direction: row;
+}
+.navbar__list-item{
+  margin-left: 15px;
+}
