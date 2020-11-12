@@ -2,7 +2,7 @@ import axios from "axios";
 
 const get = async (url = "", params = {}) => {
   const apis = axios.create({
-    baseURL: "https://pokeapi.co/api/v2/",
+    // baseURL: "https://pokeapi.co/api/v2/",
     headers: {
       "Content-Type": "application/json"
     }

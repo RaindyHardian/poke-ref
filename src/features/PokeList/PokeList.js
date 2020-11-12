@@ -1,27 +1,59 @@
 import React, { useEffect, useState } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 import api from "../../api/api";
+import PokeListItem from "../../components/PokeList/PokeListItem";
+import Pagination from "../../components/Pagination";
 
 const PokeList = () => {
+  const history = useHistory();
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const [page, setPage] = useState(parseInt(query.get("page")) || 1);
   const [poke, setPoke] = useState({});
   const [error, setError] = useState([]);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const fetch = async () => {
-      const { data, error } = await api.getAllPokemon();
+      setLoading(true)
+      const { data, error } = await api.getAllPokemon(page);
       setPoke(data);
       setError(error);
       setLoading(false);
     };
     fetch();
-  }, []);
-  
+  }, [page]);
+
+  const changePage = e => {
+    query.set("page", e.target.attributes.pageval.value);
+    history.push({
+      pathname: location.pathname,
+      search: query.toString()
+    });
+    setPage(e.target.attributes.pageval.value);
+  };
+
   return (
     <div>
-      {loading
-        ? "Loading"
-        : error
-        ? "There's an error, please refresh the page"
-        : poke.results.map((res, idx) => <div key={idx}>{res.name}</div>)}
+      {loading ? (
+        "Loading"
+      ) : error ? (
+        "There's an error, please refresh the page"
+      ) : (
+        <div>
+          {poke.results.map((res, idx) => (
+            <PokeListItem key={idx} name={res.name} url={res.url} />
+          ))}
+          <div>
+            <Pagination
+              totalData={poke.count}
+              dataPerPage={20}
+              currentPage={page}
+              changePage={changePage}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
