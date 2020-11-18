@@ -1,28 +1,30 @@
 import React from "react";
 import "./navbar.css";
-import { NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const pages = [
   {
     label: "Home",
-    route: "/"
+    route: "/",
   },
   {
     label: "Category",
-    route: "/category"
+    route: "/category",
   },
   {
     label: "Search",
-    route: "/search"
-  }
+    route: "/search",
+  },
 ];
 const Navbar = () => {
   return (
     <div className="navbar__container">
-      <div className="navbar__logo">
-        <img src="/pikachu-crop.png" className="navbar__icon" alt="logo" />
-        <div className="navbar__name">Poke-ref</div>
-      </div>
+      <NavLink to="/" className="navbar__link">
+        <div className="navbar__logo">
+          <img src="/pikachu-crop.png" className="navbar__icon" alt="logo" />
+          <div className="navbar__name">Poke-ref</div>
+        </div>
+      </NavLink>
       <div className="navbar__list">
         {pages.map(({ label, route }) => (
           <NavLink
