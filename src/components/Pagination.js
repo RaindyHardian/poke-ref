@@ -1,39 +1,41 @@
 import React from "react";
 
-const Pagination = ({totalData, dataPerPage, currentPage, changePage}) => {
+const Pagination = ({ totalData, dataPerPage, currentPage, changePage }) => {
   const pageNumbers = [];
-
-  for (let i = 1; i <= Math.ceil(totalData / dataPerPage); i++) {
+  const totalPage = Math.ceil(totalData / dataPerPage);
+  
+  for (let i = 1; i <= totalPage; i++) {
     pageNumbers.push(i);
   }
+
+  let renderPageNumbers = pageNumbers.map((item) => {
+    if (
+      item === 1 ||
+      item === totalPage ||
+      item === parseInt(currentPage) ||
+      (item >= parseInt(currentPage) - 2 && item <= parseInt(currentPage) + 2)
+    ) {
+      return (
+        <li
+          className={
+            item === parseInt(currentPage)
+              ? "pagination__link pagination__active"
+              : "pagination__link"
+          }
+          key={item}
+          pageval={item}
+          onClick={changePage}
+        >
+          {item}
+        </li>
+      );
+    }
+    return null;
+  });
+  
   return (
     <div>
-      <ul className="pagination__ul">
-        {pageNumbers.map(item => {
-          if (parseInt(currentPage) === item) {
-            return (
-              <li
-                className="pagination__link pagination__active"
-                key={item}
-                pageval={item}
-                onClick={changePage}
-              >
-                {item}
-              </li>
-            );
-          }
-          return (
-            <li
-              className="pagination__link"
-              key={item}
-              pageval={item}
-              onClick={changePage}
-            >
-              {item}
-            </li>
-          );
-        })}
-      </ul>
+      <ul className="pagination__ul">{renderPageNumbers}</ul>
     </div>
   );
 };
