@@ -36,3 +36,65 @@
 .navbar__list-item{
   margin-left: 15px;
 }
+.navbar__expand{
+  display: none;
+}
+
+@media screen and (max-width:420px){
+  .navbar__container{
+    padding: 10px 20px;
+  }
+  .navbar__expand{
+    display: inline-block;
+    cursor: pointer;
+    z-index: 5;
+  }
+  .navbar__list-item{
+    color: rgb(224, 224, 224);
+  }
+  .navbar__active{
+    color: white;
+  }
+  .navbar__list{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-color: #353535;
+    z-index: 4;
+    padding: 2em;
+  }
+  .navbar__list.open{
+    display: flex;
+    animation-name: openNav;
+    animation-duration: 300ms;
+    animation-fill-mode: forwards;
+  }
+  .navbar__list.close{
+      display: flex;
+      animation-name: closeNav;
+      animation-duration: 300ms;
+      animation-fill-mode: forwards;
+      pointer-events: none;
+      padding: 0;
+  }
+  .hideText{
+    display:none;
+  }
+}
+
+@keyframes openNav {
+  from {height: 0vh;}
+  to {height:100vh;}
+}
+@keyframes closeNav {
+  from {height: 100vh;}
+  to {
+    height:0vh;
+  }
+}
