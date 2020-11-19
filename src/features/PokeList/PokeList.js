@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import api from "../../api/api";
 import PokeListItem from "../../components/PokeList/PokeListItem";
-import Pagination from "../../components/Pagination";
+import Pagination from "../../components/Pagination/Pagination";
 import "./pokelist.css"
 
 const PokeList = () => {
