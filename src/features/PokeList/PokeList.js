@@ -3,6 +3,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import api from "../../api/api";
 import PokeListItem from "../../components/PokeList/PokeListItem";
 import Pagination from "../../components/Pagination";
+import "./pokelist.css"
 
 const PokeList = () => {
   const history = useHistory();
@@ -41,9 +42,11 @@ const PokeList = () => {
         "There's an error, please refresh the page"
       ) : (
         <div>
-          {poke.results.map((res, idx) => (
-            <PokeListItem key={idx} name={res.name} url={res.url} />
-          ))}
+          <div className="pokelist__container">
+            {poke.results.map((res, idx) => (
+              <PokeListItem key={idx} name={res.name} url={res.url} />
+            ))}
+          </div>
           <div>
             <Pagination
               totalData={poke.count}
