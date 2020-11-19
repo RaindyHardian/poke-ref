@@ -1,9 +1,10 @@
 import React from "react";
+import "./pagination.css";
 
 const Pagination = ({ totalData, dataPerPage, currentPage, changePage }) => {
   const pageNumbers = [];
   const totalPage = Math.ceil(totalData / dataPerPage);
-  
+
   for (let i = 1; i <= totalPage; i++) {
     pageNumbers.push(i);
   }
@@ -32,10 +33,26 @@ const Pagination = ({ totalData, dataPerPage, currentPage, changePage }) => {
     }
     return null;
   });
-  
+
   return (
-    <div>
-      <ul className="pagination__ul">{renderPageNumbers}</ul>
+    <div className="pagination">
+      <ul className="pagination__ul">
+        <li
+          className={parseInt(currentPage)!==1?"pagination__link":"pagination__disabled"}
+          pageval={parseInt(currentPage) - 1}
+          onClick={parseInt(currentPage)!==1?changePage:null}
+        >
+          {"<"}
+        </li>
+        {renderPageNumbers}
+        <li
+          className={parseInt(currentPage)!==totalPage?"pagination__link":"pagination__disabled"}
+          pageval={parseInt(currentPage) + 1}
+          onClick={parseInt(currentPage)!==totalPage?changePage:null}
+        >
+          {">"}
+        </li>
+      </ul>
     </div>
   );
 };

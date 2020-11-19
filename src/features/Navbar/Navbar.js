@@ -1,29 +1,54 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./navbar.css";
-import { NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const pages = [
   {
     label: "Home",
-    route: "/"
+    route: "/",
   },
   {
     label: "Category",
-    route: "/category"
+    route: "/category",
   },
   {
     label: "Search",
-    route: "/search"
-  }
+    route: "/search",
+  },
 ];
 const Navbar = () => {
+  const navListRef = useRef();
+  let expanded = false;
+  const navbarToggle = () => {
+    const list = navListRef.current.children;
+    // console.log(list[0].classList);
+    if (!expanded) {
+      navListRef.current.classList.remove("close");
+      for (let item of list) {
+        item.classList.remove("hideText");
+      }
+      navListRef.current.classList.add("open");
+    } else {
+      navListRef.current.classList.remove("open");
+      for (let item of list) {
+        item.classList.add("hideText");
+      }
+      navListRef.current.classList.add("close");
+    }
+    expanded = !expanded;
+  };
   return (
     <div className="navbar__container">
-      <div className="navbar__logo">
-        <img src="/pikachu-crop.png" className="navbar__icon" alt="logo" />
-        <div className="navbar__name">Poke-ref</div>
+      <NavLink to="/" className="navbar__link">
+        <div className="navbar__logo">
+          <img src="/pikachu-crop.png" className="navbar__icon" alt="logo" />
+          <div className="navbar__name">Poke-ref</div>
+        </div>
+      </NavLink>
+      <div className="navbar__expand" onClick={navbarToggle}>
+        Expand
       </div>
-      <div className="navbar__list">
+      <div className="navbar__list" ref={navListRef}>
         {pages.map(({ label, route }) => (
           <NavLink
             exact

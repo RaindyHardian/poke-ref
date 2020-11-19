@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../../api/api";
+import "./pokelistitem.css"
 
 const PokeListItem = ({ name, url }) => {
   const [poke, setPoke] = useState({});
@@ -21,7 +22,7 @@ const PokeListItem = ({ name, url }) => {
       ) : error ? (
         "There's an error, please refresh the page"
       ) : (
-        <div>
+        <div className="pokelistitem__box">
           <img src={poke.sprites.front_default} alt="" />
           <div>{poke.name}</div>
         </div>
