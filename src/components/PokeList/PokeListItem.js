@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../../api/api";
-import "./pokelistitem.css"
+import "./pokelistitem.css";
 
 const PokeListItem = ({ name, url }) => {
   const [poke, setPoke] = useState({});
@@ -23,8 +23,10 @@ const PokeListItem = ({ name, url }) => {
         "There's an error, please refresh the page"
       ) : (
         <div className="pokelistitem__box">
-          <img src={poke.sprites.front_default} alt="" />
-          <div>{poke.name}</div>
+          <div className="pokelistitem__select">
+            <img src={poke.sprites.front_default} alt="" />
+            <div className="pokelistitem__name">{poke.name}</div>
+          </div>
         </div>
       )}
     </div>
