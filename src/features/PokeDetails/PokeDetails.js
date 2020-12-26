@@ -29,46 +29,53 @@ const PokeDetails = () => {
         "There's an error, please refresh the page"
       ) : (
         <div>
-          <p className="pokedetails__name">{poke.name}</p>
-          <img
-            className="pokedetails__image"
-            src={poke.sprites.front_default}
-            alt=""
-          />
-          <div className="pokedetails__types">
-            {poke.types.map((item) => (
-              <div className="pokedetails__type_item">{item.type.name}</div>
-            ))}
-          </div>
-          <div className="pokedetails__info">
-            <div className="pokedetails__info_height">
-              <p>Height</p>
-              <p className="">{poke.height} m</p>
+          <div className="pokedetails__info_section">
+            <img
+              className="pokedetails__image"
+              src={poke.sprites.front_default}
+              alt=""
+            />
+            <div className="pokedetails__info_box">
+              <p className="pokedetails__name">{poke.name}</p>
+
+              <div className="pokedetails__info">
+                <p>TYPE</p>
+                <div className="pokedetails__types">
+                  {poke.types.map((item) => (
+                    <div className="pokedetails__type_item">
+                      {item.type.name}
+                    </div>
+                  ))}
+                </div>
+                <p>HEIGHT</p>
+                <p className="">{poke.height} m</p>
+                <p>WEIGHT</p>
+                <p className="">{poke.weight} kg</p>
+              </div>
             </div>
-            <div className="pokedetails__info_weight">
-              <p>Weight</p>
-              <p className="">{poke.weight} kg</p>
+          </div>
+
+          <div className="pokedetails__abilities_box">
+            <div className="pokedetails__abilities_title">Abilities</div>
+            <div className="pokedetails__abilities">
+              {poke.abilities.map((item) => (
+                <div>{item.ability.name}</div>
+              ))}
             </div>
           </div>
-          <div className="pokedetails__abilities">
-            <div>Abilities</div>
-            {poke.abilities.map((item) => (
-              <div>{item.ability.name}</div>
-            ))}
-          </div>
-          <div className="pokedetails__stats">
-            <div>Stats</div>
+          <div className="pokedetails__stats_box">
+            <div className="pokedetails__stats_title">Stats</div>
             <div className="pokedetails__stats_grid">
               {poke.stats.map((item) => (
-                <div>
+                <div className="pokedetails__stats_item">
                   <div>{item.stat.name}</div>
-                  <div>{item.base_stat}</div>
+                  <div className="pokedetails__stats_value">{item.base_stat}</div>
                 </div>
               ))}
             </div>
           </div>
-          <div className="pokedetails__moves">
-            <div>Moves</div>
+          <div className="pokedetails__moves_box">
+            <div className="pokedetails__moves_title">Moves</div>
             <div className="pokedetails__moves_grid">
               {poke.moves.map((item) => (
                 <div>{item.move.name}</div>
