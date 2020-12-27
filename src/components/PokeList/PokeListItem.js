@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import api from "../../api/api";
 import "./pokelistitem.css";
 
@@ -23,10 +24,10 @@ const PokeListItem = ({ name, url }) => {
         "There's an error, please refresh the page"
       ) : (
         <div className="pokelistitem__box">
-          <div className="pokelistitem__select">
+          <Link to={`/pokemon/${poke.id}`} className="pokelistitem__select">
             <img src={poke.sprites.front_default} alt="" />
             <div className="pokelistitem__name">{poke.name}</div>
-          </div>
+          </Link>
         </div>
       )}
     </div>
