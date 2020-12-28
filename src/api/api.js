@@ -2,7 +2,7 @@ import httpClient from "./httpClient";
 
 async function getAllPokemon(query) {
   const offset = (parseInt(query)-1)*20
-  const param = `?offset=${offset}&limit=20`
+  const param = `?offset=${offset}&limit=18`
   try {
     const { data, error } = await httpClient.get(
       "https://pokeapi.co/api/v2/pokemon"+param
