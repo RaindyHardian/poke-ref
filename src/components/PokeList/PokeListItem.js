@@ -25,7 +25,7 @@ const PokeListItem = ({ name, url }) => {
       ) : (
         <div className="pokelistitem__box">
           <Link to={`/pokemon/${poke.id}`} className="pokelistitem__select">
-            <img src={poke.sprites.front_default} alt="" />
+            <img src={poke.sprites.front_default} alt="" className="pokelistitem__pic"/>
             <div className="pokelistitem__name">{poke.name}</div>
           </Link>
         </div>
