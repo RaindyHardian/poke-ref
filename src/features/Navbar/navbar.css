@@ -24,11 +24,13 @@
 }
 .navbar__link:hover{
   cursor: pointer;
-  color: black;
+  /* color: black; */
+  color: #cf181c;
 }
 .navbar__active{
-  color: black;
-  font-weight: bold;
+  /* color: black; */
+  /* font-weight: bold; */
+  color: #b60407;
 }
 .navbar__list{
   display: flex;

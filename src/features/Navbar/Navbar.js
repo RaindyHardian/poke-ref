@@ -41,7 +41,7 @@ const Navbar = () => {
     <div className="navbar__container">
       <NavLink to="/" className="navbar__link">
         <div className="navbar__logo">
-          <img src="/pikachu-crop.png" className="navbar__icon" alt="logo" />
+          <img src="/pokeball.svg" className="navbar__icon" alt="logo" />
           <div className="navbar__name">Poke-ref</div>
         </div>
       </NavLink>
