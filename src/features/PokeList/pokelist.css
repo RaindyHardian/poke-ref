@@ -10,3 +10,10 @@
   background-attachment: fixed;
   background-size: cover;
 }
+
+@media screen and (max-width:420px){
+  .pokelist__container{
+    grid-template-columns: auto auto;
+    gap: 20px;
+  }
+}

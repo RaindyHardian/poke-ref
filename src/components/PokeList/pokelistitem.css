@@ -4,7 +4,6 @@
   align-items: center;
 }
 .pokelistitem__select{
-  /* padding: 10px; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,14 +14,12 @@
   box-shadow: 5px 5px 4px 0px rgba(0, 0, 0, 0.29);
   -webkit-box-shadow: 5px 5px 4px 0px rgba(0, 0, 0, 0.29);
   -moz-box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.29);
+  max-width: 120px;
 }
 .pokelistitem__select:hover{
   border-radius: 5px;
   background-color: rgb(243, 243, 243);
   cursor: pointer;
-  /* box-shadow: 5px 5px 4px 0px rgba(0, 0, 0, 0.29);
-  -webkit-box-shadow: 5px 5px 4px 0px rgba(0, 0, 0, 0.29);
-  -moz-box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.29); */
 }
 .pokelistitem__pic{
   padding: 10px;
