@@ -3,7 +3,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import api from "../../api/api";
 import PokeListItem from "../../components/PokeList/PokeListItem";
 import Pagination from "../Pagination/Pagination";
-import "./pokelist.css"
+import "./pokelist.css";
 
 const PokeList = () => {
   const history = useHistory();
@@ -11,25 +11,33 @@ const PokeList = () => {
   const query = new URLSearchParams(location.search);
   const [page, setPage] = useState(parseInt(query.get("page")) || 1);
   const [poke, setPoke] = useState({});
-  const [error, setError] = useState([]);
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetch = async () => {
-      setLoading(true)
-      const { data, error } = await api.getAllPokemon(page);
-      setPoke(data);
-      setError(error);
+      setLoading(true);
+      try {
+        const { data, error } = await api.getAllPokemon(page);
+        if (error) {
+          throw new Error(error);
+        }
+        setPoke(data);
+        setError(null);
+      } catch (error) {
+        setError(error.message);
+      }
       setLoading(false);
     };
     fetch();
+    
   }, [page]);
 
-  const changePage = e => {
+  const changePage = (e) => {
     query.set("page", e.target.attributes.pageval.value);
     history.push({
       pathname: location.pathname,
-      search: query.toString()
+      search: query.toString(),
     });
     setPage(e.target.attributes.pageval.value);
   };

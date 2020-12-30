@@ -5,17 +5,26 @@ import "./pokelistitem.css";
 
 const PokeListItem = ({ name, url }) => {
   const [poke, setPoke] = useState({});
-  const [error, setError] = useState([]);
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetch = async () => {
-      const { data, error } = await api.getPokemon(url);
-      setPoke(data);
-      setError(error);
+      setLoading(true);
+      try {
+        const { data, error } = await api.getPokemon(url);
+        if(error){
+          throw new Error(error)
+        }
+        setPoke(data);
+        setError(null)
+      } catch (error) {
+        setError(error.message);
+      }
       setLoading(false);
     };
     fetch();
   }, [url]);
+
   return (
     <div>
       {loading ? (
@@ -25,7 +34,11 @@ const PokeListItem = ({ name, url }) => {
       ) : (
         <div className="pokelistitem__box">
           <Link to={`/pokemon/${poke.id}`} className="pokelistitem__select">
-            <img src={poke.sprites.front_default} alt="" className="pokelistitem__pic"/>
+            <img
+              src={poke.sprites.front_default}
+              alt=""
+              className="pokelistitem__pic"
+            />
             <div className="pokelistitem__name">{poke.name}</div>
           </Link>
         </div>

@@ -7,16 +7,23 @@ const PokeDetails = () => {
   const { id } = useParams();
   const [poke, setPoke] = useState({});
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetch = async () => {
       setLoading(true);
-      const { data, error } = await api.getPokemon(
-        `https://pokeapi.co/api/v2/pokemon/${id}`
-      );
-      setPoke(data);
-      setError(error);
+      try {
+        const { data, error } = await api.getPokemon(
+          `https://pokeapi.co/api/v2/pokemon/${id}`
+        );
+        if (error) {
+          throw new Error(error);
+        }
+        setPoke(data);
+        setError(null);
+      } catch (error) {
+        setError(error.message);
+      }
       setLoading(false);
     };
     fetch();
