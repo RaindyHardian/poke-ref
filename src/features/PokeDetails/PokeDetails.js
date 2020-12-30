@@ -20,7 +20,7 @@ const PokeDetails = () => {
       setLoading(false);
     };
     fetch();
-  }, []);
+  }, [id]);
   return (
     <div className="pokedetails">
       {loading ? (
@@ -42,7 +42,10 @@ const PokeDetails = () => {
                 <p>TYPE</p>
                 <div className="pokedetails__types">
                   {poke.types.map((item) => (
-                    <div className="pokedetails__type_item">
+                    <div
+                      className="pokedetails__type_item"
+                      key={item.type.name}
+                    >
                       {item.type.name}
                     </div>
                   ))}
@@ -59,7 +62,7 @@ const PokeDetails = () => {
             <div className="pokedetails__abilities_title">Abilities</div>
             <div className="pokedetails__abilities">
               {poke.abilities.map((item) => (
-                <div>{item.ability.name}</div>
+                <div key={item.ability.name}>{item.ability.name}</div>
               ))}
             </div>
           </div>
@@ -67,9 +70,11 @@ const PokeDetails = () => {
             <div className="pokedetails__stats_title">Stats</div>
             <div className="pokedetails__stats_grid">
               {poke.stats.map((item) => (
-                <div className="pokedetails__stats_item">
+                <div className="pokedetails__stats_item" key={item.stat.name}>
                   <div>{item.stat.name}</div>
-                  <div className="pokedetails__stats_value">{item.base_stat}</div>
+                  <div className="pokedetails__stats_value">
+                    {item.base_stat}
+                  </div>
                 </div>
               ))}
             </div>
@@ -78,7 +83,7 @@ const PokeDetails = () => {
             <div className="pokedetails__moves_title">Moves</div>
             <div className="pokedetails__moves_grid">
               {poke.moves.map((item) => (
-                <div>{item.move.name}</div>
+                <div key={item.move.name}>{item.move.name}</div>
               ))}
             </div>
           </div>
