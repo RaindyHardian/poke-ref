@@ -23,6 +23,8 @@
 }
 .pokelistitem__pic{
   padding: 10px;
+  min-width: 116px;
+  min-height: 116px;
 }
 .pokelistitem__name{
   /* color: #404040; */

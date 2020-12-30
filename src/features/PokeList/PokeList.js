@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ContentLoader from "react-content-loader";
 import { useHistory, useLocation } from "react-router-dom";
 import api from "../../api/api";
 import PokeListItem from "../../components/PokeList/PokeListItem";
@@ -30,7 +31,6 @@ const PokeList = () => {
       setLoading(false);
     };
     fetch();
-    
   }, [page]);
 
   const changePage = (e) => {
@@ -45,14 +45,31 @@ const PokeList = () => {
   return (
     <div>
       {loading ? (
-        "Loading"
+        <div className="pokelist__container">
+          {[...Array(6)].map((_, i) => (
+            <ContentLoader
+              key={i}
+              width={120}
+              height={146}
+              title="Loading Pokemon"
+            >
+              <rect x="0" y="0" rx="4" ry="4" width="100%" height="110" />
+              <rect x="0" y="115" rx="3" ry="3" width="100%" height="25" />
+            </ContentLoader>
+          ))}
+        </div>
       ) : error ? (
         "There's an error, please refresh the page"
       ) : (
         <div>
           <div className="pokelist__container">
-            {poke.results.map((res, idx) => (
-              <PokeListItem key={idx} name={res.name} url={res.url} />
+            {poke.results.map((res) => (
+              <PokeListItem
+                key={res.id}
+                id={res.id}
+                name={res.name}
+                sprite={res.sprite}
+              />
             ))}
           </div>
           <div>
