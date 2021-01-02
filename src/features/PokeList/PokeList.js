@@ -5,6 +5,7 @@ import api from "../../api/api";
 import PokeListItem from "../../components/PokeList/PokeListItem";
 import Pagination from "../Pagination/Pagination";
 import "./pokelist.css";
+// import axios from "axios"
 
 const PokeList = () => {
   const history = useHistory();
@@ -23,6 +24,7 @@ const PokeList = () => {
         if (error) {
           throw new Error(error);
         }
+        // const { data } = await axios.get("https://pokeapi.co/api/v2/pokemon")
         setPoke(data);
         setError(null);
       } catch (error) {
@@ -52,6 +54,7 @@ const PokeList = () => {
               width={120}
               height={146}
               title="Loading Pokemon"
+              data-testid={"loading-" + i}
             >
               <rect x="0" y="0" rx="4" ry="4" width="100%" height="110" />
               <rect x="0" y="115" rx="3" ry="3" width="100%" height="25" />
@@ -59,7 +62,9 @@ const PokeList = () => {
           ))}
         </div>
       ) : error ? (
-        "There's an error, please refresh the page"
+        <div data-testid="pokelist-error">
+          {error}, please refresh the page
+        </div>
       ) : (
         <div>
           <div className="pokelist__container">
