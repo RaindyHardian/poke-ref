@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ContentLoader from "react-content-loader";
 import { useParams } from "react-router-dom";
 import api from "../../api/api";
 import "./pokedetails.css";
@@ -28,14 +29,33 @@ const PokeDetails = () => {
     };
     fetch();
   }, [id]);
+
   return (
     <div className="pokedetails">
       {loading ? (
-        "Loading"
+        window.innerWidth >= 420 ? (
+          <ContentLoader
+            width={"550"}
+            backgroundColor={"#e3e1e3"}
+            foregroundColor={"#d4d4d4"}
+            title="Loading Pokemon"
+            data-testid="pokedetails-loading"
+            style={{ height: "100vh" }}
+          >
+            <rect x="0" y="0" rx="4" ry="4" width="200" height="200" />
+            <rect x="230" y="0" rx="4" ry="4" width="320" height="200" />
+            <rect x="0" y="220" rx="4" ry="4" width="100%" height="100" />
+            <rect x="0" y="340" rx="4" ry="4" width="100%" height="200" />
+          </ContentLoader>
+        ) : (
+          <div data-testid="pokedetails-loading">Loading</div>
+        )
       ) : error ? (
-        "There's an error, please refresh the page"
+        <div data-testid="pokedetails-error">
+          {error}, please refresh the page
+        </div>
       ) : (
-        <div>
+        <div className="pokedetails__content_wrap">
           <div className="pokedetails__info_section">
             <img
               className="pokedetails__image"
