@@ -1,13 +1,13 @@
-import React from 'react'
-import Navbar from '../../features/Navbar/Navbar';
+import React from "react";
+import Navbar from "../../features/Navbar/Navbar";
 
-const Page = ({children}) => {
+const Page = ({ children }) => {
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       <main>{children}</main>
     </div>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;
