@@ -26,6 +26,7 @@ const Pagination = ({ totalData, dataPerPage, currentPage, changePage }) => {
           key={item}
           pageval={item}
           onClick={changePage}
+          data-testid={"page-" + item}
         >
           {item}
         </li>
@@ -38,17 +39,27 @@ const Pagination = ({ totalData, dataPerPage, currentPage, changePage }) => {
     <div className="pagination">
       <ul className="pagination__ul">
         <li
-          className={parseInt(currentPage)!==1?"pagination__link":"pagination__disabled"}
+          className={
+            parseInt(currentPage) !== 1
+              ? "pagination__link"
+              : "pagination__disabled"
+          }
           pageval={parseInt(currentPage) - 1}
-          onClick={parseInt(currentPage)!==1?changePage:null}
+          onClick={parseInt(currentPage) !== 1 ? changePage : null}
+          data-testid="page-prev"
         >
           {"<"}
         </li>
         {renderPageNumbers}
         <li
-          className={parseInt(currentPage)!==totalPage?"pagination__link":"pagination__disabled"}
+          className={
+            parseInt(currentPage) !== totalPage
+              ? "pagination__link"
+              : "pagination__disabled"
+          }
           pageval={parseInt(currentPage) + 1}
-          onClick={parseInt(currentPage)!==totalPage?changePage:null}
+          onClick={parseInt(currentPage) !== totalPage ? changePage : null}
+          data-testid="page-next"
         >
           {">"}
         </li>
