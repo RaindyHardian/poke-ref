@@ -67,6 +67,7 @@ const Navbar = () => {
             key={route}
             className="navbar__link"
             activeClassName="navbar__active"
+            data-testid={label}
           >
             {label}
           </NavLink>
