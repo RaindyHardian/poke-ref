@@ -40,9 +40,11 @@ const Type = () => {
         <div>{error}, please refresh the page</div>
       ) : (
         <div className="typelist__container">
-          {types.results.map(({ name }, idx) => (
-            <TypeListItem key={idx} name={name} />
-          ))}
+          {types.results.map(({ name }, idx) => {
+            if (name !== "shadow" && name !== "unknown") {
+              return <TypeListItem key={idx} name={name} />;
+            } else return null;
+          })}
         </div>
       )}
     </div>
