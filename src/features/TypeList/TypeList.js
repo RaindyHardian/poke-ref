@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 // import ContentLoader from "react-content-loader";
-// import { useHistory, useLocation } from "react-router-dom";
-// import api from "../../api/api";
-// import Pagination from "../Pagination/Pagination";
+import api from "../../api/api";
+import TypeListItem from "../../components/TypeList/TypeListItem";
 import "./typelist.css";
-import axios from "axios";
+
 const Type = () => {
   // const history = useHistory()
   // const location = useLocation()
@@ -18,7 +17,10 @@ const Type = () => {
     const fetch = async () => {
       setLoading(true);
       try {
-        const { data } = await axios.get("https://pokeapi.co/api/v2/type");
+        const { data, error } = await api.getAllTypes();
+        if (error) {
+          throw new Error(error);
+        }
         setTypes(data);
         setError(null);
       } catch (error) {
@@ -30,15 +32,16 @@ const Type = () => {
   }, []);
 
   return (
-    <div>
+    <div className="typelist">
+      <h1 className="typelist__title">Pokemon Type</h1>
       {loading ? (
-        <div>Loading</div>
+        <div>Loading...</div>
       ) : error ? (
         <div>{error}, please refresh the page</div>
       ) : (
-        <div>
-          {types.results.map(({url, name})=>(
-            <div>{name}</div>
+        <div className="typelist__container">
+          {types.results.map(({ name }, idx) => (
+            <TypeListItem key={idx} name={name} />
           ))}
         </div>
       )}

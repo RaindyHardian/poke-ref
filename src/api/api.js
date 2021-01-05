@@ -40,8 +40,36 @@ async function getPokemon(url) {
   }
 }
 
+async function getAllTypes() {
+  try {
+    const { data, error } = await httpClient.get(
+      "https://pokeapi.co/api/v2/type"
+    );
+    if (error) {
+      throw new Error(error);
+    }
+    return { data };
+  } catch (error) {
+    return { error: error.message };
+  }
+}
+
+async function getType(url) {
+  try {
+    const { data, error } = await httpClient.get(url);
+    if (error) {
+      throw new Error(error);
+    }
+    return { data };
+  } catch (error) {
+    return { error: error.message };
+  }
+}
+
 const api = {
   getAllPokemon,
   getPokemon,
+  getAllTypes,
+  getType,
 };
 export default api;
