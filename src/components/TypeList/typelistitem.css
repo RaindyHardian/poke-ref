@@ -12,65 +12,6 @@
   text-decoration: none;
   color: white;
   padding: 10px 15px;
-}
-
-.type-normal {
-  background-color: #aa9;
-}
-.type-fire {
-  background-color: #f42;
-}
-.type-water {
-  background-color: #39f;
-}
-.type-electric {
-  background-color: #fc3;
-}
-.type-grass {
-  background-color: #7c5;
-}
-.type-ice {
-  background-color: #6cf;
-}
-.type-fighting {
-  background-color: #b54;
-}
-.type-poison {
-  background-color: #a59;
-}
-.type-ground {
-  background-color: #db5;
-}
-.type-flying {
-  background-color: #89f;
-}
-.type-psychic {
-  background-color: #f59;
-}
-.type-bug {
-  background-color: #ab2;
-}
-.type-rock {
-  background-color: #ba6;
-}
-.type-ghost {
-  background-color: #66b;
-}
-.type-dragon {
-  background-color: #76e;
-}
-.type-dark {
-  background-color: #754;
-}
-.type-steel {
-  background-color: #aab;
-}
-.type-fairy {
-  background-color: #e9e;
-}
-.type-unknown {
-  background-color: rgb(107, 41, 93);
-}
-.type-shadow {
-  background-color: #698;
+  width: 100px;
+  text-transform: capitalize;
 }
