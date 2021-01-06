@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import api from "../../api/api";
 import typeColor from "../../components/TypeList/typeColor";
-import TypeListItem from "../../components/TypeList/TypeListItem";
 import "./typedetails.css";
 
 const TypeDetails = () => {

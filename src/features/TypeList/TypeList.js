@@ -35,9 +35,9 @@ const Type = () => {
     <div className="typelist">
       <h1 className="typelist__title">Pokemon Type</h1>
       {loading ? (
-        <div>Loading...</div>
+        <div data-testid="typelist-loading">Loading...</div>
       ) : error ? (
-        <div>{error}, please refresh the page</div>
+        <div data-testid="typelist-error">{error}, please refresh the page</div>
       ) : (
         <div className="typelist__container">
           {types.results.map(({ name }, idx) => {
