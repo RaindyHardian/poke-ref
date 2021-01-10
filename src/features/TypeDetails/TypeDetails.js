@@ -13,7 +13,7 @@ const TypeDetails = () => {
     const fetch = async () => {
       setLoading(true);
       try {
-        const { data, error } = await api.getPokemon(
+        const { data, error } = await api.getType(
           "https://pokeapi.co/api/v2/type/" + id
         );
         if (error) {
@@ -30,11 +30,11 @@ const TypeDetails = () => {
   }, [id]);
   return (
     <div className="typedetails">
-      <h1 className="typedetails__title">{id} type</h1>
+      <h1 className="typedetails__title" data-testid={id}>{id} type</h1>
       {loading ? (
-        <div>Loading...</div>
+        <div data-testid="typedetails-loading">Loading...</div>
       ) : error ? (
-        <div>{error}, please refresh the page</div>
+        <div  data-testid="typedetails-error">{error}, please refresh the page</div>
       ) : (
         <div>
           <div className="typedetails__damage">
