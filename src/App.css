@@ -1,27 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-body{
-  font-family: 'Inter', sans-serif;
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #ffffff;
 }
 
-.icon-check{
+.icon-check {
   color: #12b112;
   border: 2px solid #12b112;
   border-radius: 100%;
   width: 20px;
 }
 
-.icon-cross{
+.icon-cross {
   color: #fa2929;
   border: 2px solid #fa2929;
   border-radius: 100%;
   width: 20px;
 }
-
 
 .type-normal {
   background-color: #aa9;

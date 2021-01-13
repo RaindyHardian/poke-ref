@@ -1,9 +1,9 @@
-.pokelistitem__box{
+.pokelistitem__box {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.pokelistitem__select{
+.pokelistitem__select {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,17 +16,17 @@
   -moz-box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.29);
   max-width: 120px;
 }
-.pokelistitem__select:hover{
+.pokelistitem__select:hover {
   border-radius: 5px;
   background-color: rgb(243, 243, 243);
   cursor: pointer;
 }
-.pokelistitem__pic{
+.pokelistitem__pic {
   padding: 10px;
   min-width: 116px;
   min-height: 116px;
 }
-.pokelistitem__name{
+.pokelistitem__name {
   /* color: #404040; */
   padding: 2px 0;
   background-color: #e52c30;
