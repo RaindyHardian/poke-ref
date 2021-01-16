@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ContentLoader from "react-content-loader";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import typeColor from "../../components/TypeList/typeColor";
 import api from "../../api/api";
 import "./pokedetails.css";
 
@@ -70,10 +71,17 @@ const PokeDetails = () => {
                 <div className="pokedetails__types">
                   {poke.types.map((item) => (
                     <div
-                      className="pokedetails__type_item"
+                      className={
+                        "pokedetails__type_item " + typeColor(item.type.name)
+                      }
                       key={item.type.name}
                     >
-                      {item.type.name}
+                      <Link
+                        to={"/type/" + item.type.name}
+                        className="pokedetails__type_link"
+                      >
+                        {item.type.name}
+                      </Link>
                     </div>
                   ))}
                 </div>

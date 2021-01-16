@@ -34,4 +34,5 @@
   color: white;
   text-align: center;
   border-top: 2px solid rgb(82, 82, 82);
+  text-transform: capitalize;
 }
