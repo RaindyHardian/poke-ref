@@ -16,6 +16,7 @@
 }
 .typedetails__damage_block {
   margin-bottom: 20px;
+  min-height: 95px;
 }
 .typedetails__damage_desc {
   margin-bottom: 10px;
@@ -67,6 +68,9 @@
 @media screen and (max-width: 420px) {
   .typedetails__damage {
     grid-template-columns: auto;
+  }
+  .typedetails__damage_block {
+    min-height: auto;
   }
   .typedetails__pokemon_title {
     text-align: left;

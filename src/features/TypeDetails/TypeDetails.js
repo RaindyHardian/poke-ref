@@ -69,16 +69,25 @@ const TypeDetails = () => {
                   </p>
                 </div>
                 <div className="typedetails__types">
-                  {type.damage_relations.double_damage_to.map(({ name }) => (
-                    <div
-                      key={name}
-                      className={"typedetails__type " + typeColor(name)}
-                    >
-                      <Link to={"/type/" + name} className="typedetails__link">
-                        {name}
-                      </Link>
+                  {type.damage_relations.double_damage_to.length > 0 ? (
+                    type.damage_relations.double_damage_to.map(({ name }) => (
+                      <div
+                        key={name}
+                        className={"typedetails__type " + typeColor(name)}
+                      >
+                        <Link
+                          to={"/type/" + name}
+                          className="typedetails__link"
+                        >
+                          {name}
+                        </Link>
+                      </div>
+                    ))
+                  ) : (
+                    <div>
+                      <b>Nothing</b>
                     </div>
-                  ))}
+                  )}
                 </div>
               </div>
 
@@ -103,16 +112,25 @@ const TypeDetails = () => {
                   </p>
                 </div>
                 <div className="typedetails__types">
-                  {type.damage_relations.half_damage_to.map(({ name }) => (
-                    <div
-                      key={name}
-                      className={"typedetails__type " + typeColor(name)}
-                    >
-                      <Link to={"/type/" + name} className="typedetails__link">
-                        {name}
-                      </Link>
+                  {type.damage_relations.half_damage_to > 0 ? (
+                    type.damage_relations.half_damage_to.map(({ name }) => (
+                      <div
+                        key={name}
+                        className={"typedetails__type " + typeColor(name)}
+                      >
+                        <Link
+                          to={"/type/" + name}
+                          className="typedetails__link"
+                        >
+                          {name}
+                        </Link>
+                      </div>
+                    ))
+                  ) : (
+                    <div>
+                      <b>Nothing</b>
                     </div>
-                  ))}
+                  )}
                 </div>
               </div>
             </div>
@@ -143,16 +161,25 @@ const TypeDetails = () => {
                   </p>
                 </div>
                 <div className="typedetails__types">
-                  {type.damage_relations.half_damage_from.map(({ name }) => (
-                    <div
-                      key={name}
-                      className={"typedetails__type " + typeColor(name)}
-                    >
-                      <Link to={"/type/" + name} className="typedetails__link">
-                        {name}
-                      </Link>
+                  {type.damage_relations.half_damage_from.length > 0 ? (
+                    type.damage_relations.half_damage_from.map(({ name }) => (
+                      <div
+                        key={name}
+                        className={"typedetails__type " + typeColor(name)}
+                      >
+                        <Link
+                          to={"/type/" + name}
+                          className="typedetails__link"
+                        >
+                          {name}
+                        </Link>
+                      </div>
+                    ))
+                  ) : (
+                    <div>
+                      <b>Nothing</b>
                     </div>
-                  ))}
+                  )}
                 </div>
               </div>
 
@@ -177,16 +204,25 @@ const TypeDetails = () => {
                   </p>
                 </div>
                 <div className="typedetails__types">
-                  {type.damage_relations.double_damage_from.map(({ name }) => (
-                    <div
-                      key={name}
-                      className={"typedetails__type " + typeColor(name)}
-                    >
-                      <Link to={"/type/" + name} className="typedetails__link">
-                        {name}
-                      </Link>
+                  {type.damage_relations.double_damage_from ? (
+                    type.damage_relations.double_damage_from.map(({ name }) => (
+                      <div
+                        key={name}
+                        className={"typedetails__type " + typeColor(name)}
+                      >
+                        <Link
+                          to={"/type/" + name}
+                          className="typedetails__link"
+                        >
+                          {name}
+                        </Link>
+                      </div>
+                    ))
+                  ) : (
+                    <div>
+                      <b>Nothing</b>
                     </div>
-                  ))}
+                  )}
                 </div>
               </div>
             </div>
