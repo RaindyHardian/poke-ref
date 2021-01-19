@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import api from "../../api/api";
+import PokeListItem from "../../components/PokeList/PokeListItem";
 import typeColor from "../../components/TypeList/typeColor";
 import "./typedetails.css";
 
@@ -30,11 +31,15 @@ const TypeDetails = () => {
   }, [id]);
   return (
     <div className="typedetails">
-      <h1 className="typedetails__title" data-testid={id}>{id} type</h1>
+      <h1 className="typedetails__title" data-testid={id}>
+        {id} type
+      </h1>
       {loading ? (
         <div data-testid="typedetails-loading">Loading...</div>
       ) : error ? (
-        <div  data-testid="typedetails-error">{error}, please refresh the page</div>
+        <div data-testid="typedetails-error">
+          {error}, please refresh the page
+        </div>
       ) : (
         <div>
           <div className="typedetails__damage">
@@ -184,6 +189,20 @@ const TypeDetails = () => {
                   ))}
                 </div>
               </div>
+            </div>
+          </div>
+          <div className="typedetails__pokemon">
+            <h2 className="typedetails__pokemon_title">
+              List of all {id} pokemon
+            </h2>
+            <div className="typedetails__pokemon_list">
+              {type.pokemon.map((res) => (
+                <PokeListItem
+                  id={res.pokemon.id}
+                  sprite={res.pokemon.sprite}
+                  name={res.pokemon.name}
+                />
+              ))}
             </div>
           </div>
         </div>
