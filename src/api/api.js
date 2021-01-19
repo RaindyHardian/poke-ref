@@ -60,7 +60,19 @@ async function getType(url) {
     if (error) {
       throw new Error(error);
     }
-    return { data };
+    const temp = data;
+    await Promise.all(
+      data.pokemon.map(async (res, idx) => {
+        const { data, error } = await api.getPokemon(res.pokemon.url);
+        if (error) {
+          throw new Error(error);
+        }
+        temp.pokemon[idx].pokemon.id = data.id;
+        temp.pokemon[idx].pokemon.sprite = data.sprites.front_default;
+        temp.pokemon[idx].pokemon.name = data.name;
+      })
+    );
+    return { data: temp };
   } catch (error) {
     return { error: error.message };
   }
