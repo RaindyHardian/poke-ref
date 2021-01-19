@@ -15,16 +15,18 @@ const PokeList = () => {
   const [poke, setPoke] = useState({});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [keyword, setKeyword] = useState("");
+  const [searchNotFound, setSearchNotFound] = useState(false);
 
   useEffect(() => {
     const fetch = async () => {
       setLoading(true);
+      setSearchNotFound(false);
       try {
         const { data, error } = await api.getAllPokemon(page);
         if (error) {
           throw new Error(error);
         }
-        // const { data } = await axios.get("https://pokeapi.co/api/v2/pokemon")
         setPoke(data);
         setError(null);
       } catch (error) {
@@ -44,8 +46,44 @@ const PokeList = () => {
     setPage(e.target.attributes.pageval.value);
   };
 
+  const findPokemon = async (e) => {
+    e.preventDefault();
+    if (keyword === "") {
+      return;
+    }
+    try {
+      const { data, error } = await api.getPokemon(
+        `https://pokeapi.co/api/v2/pokemon/${keyword}`
+      );
+      if (error) {
+        throw new Error(error);
+      }
+      history.push("/pokemon/" + data.id);
+    } catch (error) {
+      if (error.message === "Request failed with status code 404") {
+        setSearchNotFound(true);
+      } else {
+        setError(error.message);
+      }
+    }
+  };
+
   return (
     <div>
+      <div className="pokelist__header">
+        <h1 className="pokelist__header_title">Pokemon</h1>
+        <form onSubmit={findPokemon} className="pokelist__form">
+          <input
+            type="text"
+            placeholder="Search Pokemon..."
+            className="pokelist__input"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+          />
+          <button className="pokelist__button">Find</button>
+        </form>
+        {searchNotFound ? <div>Search Not Found</div> : null}
+      </div>
       {loading ? (
         <div className="pokelist__container">
           {[...Array(6)].map((_, i) => (
@@ -62,7 +100,7 @@ const PokeList = () => {
           ))}
         </div>
       ) : error ? (
-        <div data-testid="pokelist-error">
+        <div className="pokelist__error" data-testid="pokelist-error">
           {error}, please refresh the page
         </div>
       ) : (
