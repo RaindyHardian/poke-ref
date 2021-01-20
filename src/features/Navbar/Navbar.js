@@ -11,10 +11,6 @@ const pages = [
     label: "Type",
     route: "/type",
   },
-  {
-    label: "Search",
-    route: "/search",
-  },
 ];
 const Navbar = () => {
   const navListRef = useRef();

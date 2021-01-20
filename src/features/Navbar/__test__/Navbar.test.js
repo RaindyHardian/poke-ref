@@ -33,9 +33,7 @@ it("renders navbar component correctly", () => {
   });
   expect(screen.getByTestId("Home")).toHaveTextContent("Home");
   expect(screen.getByTestId("Type")).toHaveTextContent("Type");
-  expect(screen.getByTestId("Search")).toHaveTextContent("Search");
   expect(screen.getByTestId("Home").getAttribute("href")).toEqual("/")
   expect(screen.getByTestId("Type").getAttribute("href")).toEqual("/type")
-  expect(screen.getByTestId("Search").getAttribute("href")).toEqual("/search")
   // screen.debug();
 });
