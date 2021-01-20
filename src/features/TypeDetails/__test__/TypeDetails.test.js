@@ -60,6 +60,9 @@ it("renders error in typedetails", async () => {
   });
   expect(api.getType).toHaveBeenCalledTimes(1);
   await waitFor(() => screen.getByTestId("typedetails-error"));
+  expect(screen.getByTestId("typedetails-error")).toHaveTextContent(
+    "Fetching Error, please refresh the page"
+  );
   // screen.debug();
 });
 
@@ -82,5 +85,12 @@ it("renders detailed pokemon info", async () => {
   expect(api.getType).toHaveBeenCalledTimes(1);
   await waitFor(() => screen.getByTestId('poison'));
   expect(screen.getByTestId('poison')).toHaveTextContent("poison type")
-  screen.debug();
+  expect(screen.getByTestId("ddt-fairy")).toHaveTextContent("fairy");
+  expect(screen.getByTestId("hdt-ground")).toHaveTextContent("ground");
+  expect(screen.getByTestId("hdf-fighting")).toHaveTextContent("fighting");
+  expect(screen.getByTestId("ddf-psychic")).toHaveTextContent("psychic");
+
+  expect(screen.getByText("List of all poison pokemon")).toBeInTheDocument()
+  expect(screen.getByText("ivysaur")).toBeInTheDocument()
+  // screen.debug();
 });

@@ -78,6 +78,7 @@ const TypeDetails = () => {
                         <Link
                           to={"/type/" + name}
                           className="typedetails__link"
+                          data-testid={"ddt-" + name}
                         >
                           {name}
                         </Link>
@@ -112,7 +113,7 @@ const TypeDetails = () => {
                   </p>
                 </div>
                 <div className="typedetails__types">
-                  {type.damage_relations.half_damage_to > 0 ? (
+                  {type.damage_relations.half_damage_to.length > 0 ? (
                     type.damage_relations.half_damage_to.map(({ name }) => (
                       <div
                         key={name}
@@ -121,6 +122,7 @@ const TypeDetails = () => {
                         <Link
                           to={"/type/" + name}
                           className="typedetails__link"
+                          data-testid={"hdt-" + name}
                         >
                           {name}
                         </Link>
@@ -170,6 +172,7 @@ const TypeDetails = () => {
                         <Link
                           to={"/type/" + name}
                           className="typedetails__link"
+                          data-testid={"hdf-" + name}
                         >
                           {name}
                         </Link>
@@ -204,7 +207,7 @@ const TypeDetails = () => {
                   </p>
                 </div>
                 <div className="typedetails__types">
-                  {type.damage_relations.double_damage_from ? (
+                  {type.damage_relations.double_damage_from.length > 0 ? (
                     type.damage_relations.double_damage_from.map(({ name }) => (
                       <div
                         key={name}
@@ -213,6 +216,7 @@ const TypeDetails = () => {
                         <Link
                           to={"/type/" + name}
                           className="typedetails__link"
+                          data-testid={"ddf-" + name}
                         >
                           {name}
                         </Link>
