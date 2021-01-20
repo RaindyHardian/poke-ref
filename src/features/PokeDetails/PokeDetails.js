@@ -79,6 +79,7 @@ const PokeDetails = () => {
                       <Link
                         to={"/type/" + item.type.name}
                         className="pokedetails__type_link"
+                        data-testid={"type-" + item.type.name}
                       >
                         {item.type.name}
                       </Link>
@@ -86,9 +87,9 @@ const PokeDetails = () => {
                   ))}
                 </div>
                 <p>HEIGHT</p>
-                <p className="">{poke.height} m</p>
+                <p data-testid="height">{poke.height} m</p>
                 <p>WEIGHT</p>
-                <p className="">{poke.weight} kg</p>
+                <p data-testid="weight">{poke.weight} kg</p>
               </div>
             </div>
           </div>
@@ -97,7 +98,12 @@ const PokeDetails = () => {
             <div className="pokedetails__abilities_title">Abilities</div>
             <div className="pokedetails__abilities">
               {poke.abilities.map((item) => (
-                <div key={item.ability.name}>{item.ability.name}</div>
+                <div
+                  key={item.ability.name}
+                  data-testid={"ability-" + item.ability.name}
+                >
+                  {item.ability.name}
+                </div>
               ))}
             </div>
           </div>
@@ -107,7 +113,10 @@ const PokeDetails = () => {
               {poke.stats.map((item) => (
                 <div className="pokedetails__stats_item" key={item.stat.name}>
                   <div>{item.stat.name}</div>
-                  <div className="pokedetails__stats_value">
+                  <div
+                    className="pokedetails__stats_value"
+                    data-testid={"stat-" + item.stat.name}
+                  >
                     {item.base_stat}
                   </div>
                 </div>
@@ -118,7 +127,12 @@ const PokeDetails = () => {
             <div className="pokedetails__moves_title">Moves</div>
             <div className="pokedetails__moves_grid">
               {poke.moves.map((item) => (
-                <div key={item.move.name}>{item.move.name}</div>
+                <div
+                  key={item.move.name}
+                  data-testid={"move-" + item.move.name}
+                >
+                  {item.move.name}
+                </div>
               ))}
             </div>
           </div>

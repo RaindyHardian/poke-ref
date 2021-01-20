@@ -56,6 +56,9 @@ it("renders error in pokedetails", async () => {
   });
   expect(api.getPokemon).toHaveBeenCalledTimes(1);
   await waitFor(() => screen.getByTestId("pokedetails-error"));
+  expect(screen.getByTestId("pokedetails-error")).toHaveTextContent(
+    "Fetching Error, please refresh the page"
+  );
   // screen.debug();
 });
 
@@ -75,5 +78,16 @@ it("renders detailed pokemon info", async () => {
   });
   expect(api.getPokemon).toHaveBeenCalledTimes(1);
   await waitFor(() => screen.getByText("bulbasaur"));
+  expect(screen.getByText("bulbasaur")).toBeInTheDocument();
+  expect(screen.getByTestId("type-grass")).toHaveTextContent("grass");
+  expect(screen.getByTestId("height")).toHaveTextContent("7 m");
+  expect(screen.getByTestId("weight")).toHaveTextContent("69 kg");
+  expect(screen.getByTestId("stat-hp")).toHaveTextContent(45); // stat
+  expect(screen.getByTestId("ability-chlorophyll")).toHaveTextContent(
+    "chlorophyll"
+  ); // ability
+  expect(screen.getByTestId("move-light-screen")).toHaveTextContent(
+    "light-screen"
+  ); // move
   // screen.debug();
 });
