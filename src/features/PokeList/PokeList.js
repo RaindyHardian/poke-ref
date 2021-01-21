@@ -79,8 +79,11 @@ const PokeList = () => {
             className="pokelist__input"
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
+            data-testid="input-search"
           />
-          <button className="pokelist__button">Find</button>
+          <button className="pokelist__button" data-testid="submit-search">
+            Find
+          </button>
         </form>
         {searchNotFound ? <div>Search Not Found</div> : null}
       </div>
