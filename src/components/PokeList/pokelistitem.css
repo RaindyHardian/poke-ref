@@ -1,5 +1,38 @@
-.pokelistitem__box{
+.pokelistitem__box {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.pokelistitem__select {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  border: 2px solid rgb(82, 82, 82);
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 5px 5px 4px 0px rgba(0, 0, 0, 0.29);
+  -webkit-box-shadow: 5px 5px 4px 0px rgba(0, 0, 0, 0.29);
+  -moz-box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.29);
+  max-width: 120px;
+}
+.pokelistitem__select:hover {
+  border-radius: 5px;
+  background-color: rgb(243, 243, 243);
+  cursor: pointer;
+}
+.pokelistitem__pic {
+  padding: 10px;
+  min-width: 116px;
+  min-height: 116px;
+}
+.pokelistitem__name {
+  /* color: #404040; */
+  padding: 2px 0;
+  background-color: #e52c30;
+  width: 100%;
+  color: white;
+  text-align: center;
+  border-top: 2px solid rgb(82, 82, 82);
+  text-transform: capitalize;
 }

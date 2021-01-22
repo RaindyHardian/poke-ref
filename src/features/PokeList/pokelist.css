@@ -1,5 +1,51 @@
-.pokelist__container{
+.pokelist__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.pokelist__header_title {
+  margin: 20px 0 10px 0;
+}
+.pokelist__input {
+  border-radius: 3px;
+  border: 1px solid lightgray;
+  padding: 10px 20px;
+  width: 300px;
+  font-size: 15px;
+  margin-right: 5px;
+}
+.pokelist__input:focus {
+  border: 1px solid rgb(110, 110, 110);
+}
+.pokelist__button {
+  font-size: 15px;
+  padding: 10px 20px;
+  border: 1px solid #e52c30;
+  background-color: #e52c30;
+  color: white;
+}
+.pokelist__button:hover{
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+.pokelist__container {
   display: grid;
   grid-template-columns: auto auto auto;
-  gap: 10px;
+  gap: 20px 50px;
+  justify-content: center;
+  padding-top: 30px;
+}
+.pokelist__error{
+  text-align: center;
+  margin-top: 30px;
+}
+@media screen and (max-width: 420px) {
+  .pokelist__container {
+    grid-template-columns: auto auto;
+    gap: 20px;
+  }
+  .pokelist__input{
+    width: 250px;
+  }
 }

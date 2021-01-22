@@ -1,0 +1,17 @@
+.typelistitem__box {
+  display: inline-block;
+  text-align: center;
+  border-radius: 5px;
+}
+.typelistitem__box:hover {
+  opacity: 0.85;
+  cursor: pointer;
+}
+.typelistitem__link {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  padding: 10px 15px;
+  width: 100px;
+  text-transform: capitalize;
+}

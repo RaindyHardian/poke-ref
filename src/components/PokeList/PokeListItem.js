@@ -1,32 +1,18 @@
-import React, { useEffect, useState } from "react";
-import api from "../../api/api";
-import "./pokelistitem.css"
+import React from "react";
+import { Link } from "react-router-dom";
+import "./pokelistitem.css";
 
-const PokeListItem = ({ name, url }) => {
-  const [poke, setPoke] = useState({});
-  const [error, setError] = useState([]);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const fetch = async () => {
-      const { data, error } = await api.getPokemon(url);
-      setPoke(data);
-      setError(error);
-      setLoading(false);
-    };
-    fetch();
-  }, [url]);
+const PokeListItem = ({ id, name, sprite }) => {
   return (
-    <div>
-      {loading ? (
-        "loading"
-      ) : error ? (
-        "There's an error, please refresh the page"
-      ) : (
-        <div className="pokelistitem__box">
-          <img src={poke.sprites.front_default} alt="" />
-          <div>{poke.name}</div>
-        </div>
-      )}
+    <div className="pokelistitem__box">
+      <Link to={`/pokemon/${id}`} className="pokelistitem__select">
+        <img
+          src={sprite}
+          alt={"Picture of " + name}
+          className="pokelistitem__pic"
+        />
+        <div className="pokelistitem__name">{name}</div>
+      </Link>
     </div>
   );
 };
