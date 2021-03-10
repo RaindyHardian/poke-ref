@@ -17,6 +17,7 @@ const PokeList = () => {
   const [loading, setLoading] = useState(true);
   const [keyword, setKeyword] = useState("");
   const [searchNotFound, setSearchNotFound] = useState(false);
+  const [searchErrMessage, setSearchErrMessage] = useState("");
 
   useEffect(() => {
     const fetch = async () => {
@@ -49,6 +50,8 @@ const PokeList = () => {
   const findPokemon = async (e) => {
     e.preventDefault();
     if (keyword === "") {
+      setSearchNotFound(true);
+      setSearchErrMessage("Please input the keyword");
       return;
     }
     try {
@@ -62,6 +65,7 @@ const PokeList = () => {
     } catch (error) {
       if (error.message === "Request failed with status code 404") {
         setSearchNotFound(true);
+        setSearchErrMessage("Pokemon Not Found");
       } else {
         setError(error.message);
       }
@@ -85,7 +89,7 @@ const PokeList = () => {
             Find
           </button>
         </form>
-        {searchNotFound ? <div>Search Not Found</div> : null}
+        {searchNotFound ? <div>{searchErrMessage}</div> : null}
       </div>
       {loading ? (
         <div className="pokelist__container">
