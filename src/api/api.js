@@ -63,7 +63,11 @@ async function getType(url) {
     const temp = data;
     await Promise.all(
       data.pokemon.map(async (res, idx) => {
-        const { data, error } = await api.getPokemon(res.pokemon.url);
+        const pokeUrl = res.pokemon.url.substring(
+          0,
+          res.pokemon.url.length - 1
+        );
+        const { data, error } = await api.getPokemon(pokeUrl);
         if (error) {
           throw new Error(error);
         }
