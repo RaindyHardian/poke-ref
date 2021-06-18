@@ -238,6 +238,7 @@ const TypeDetails = () => {
             <div className="typedetails__pokemon_list">
               {type.pokemon.map((res) => (
                 <PokeListItem
+                  key={res.pokemon.id}
                   id={res.pokemon.id}
                   sprite={res.pokemon.sprite}
                   name={res.pokemon.name}

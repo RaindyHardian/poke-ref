@@ -5,7 +5,6 @@ import api from "../../api/api";
 import PokeListItem from "../../components/PokeList/PokeListItem";
 import Pagination from "../Pagination/Pagination";
 import "./pokelist.css";
-// import axios from "axios"
 
 const PokeList = () => {
   const history = useHistory();
@@ -89,7 +88,7 @@ const PokeList = () => {
             Find
           </button>
         </form>
-        {searchNotFound ? <div>{searchErrMessage}</div> : null}
+        {searchNotFound ? <div className="pokelist__searchnotfound">{searchErrMessage}</div> : null}
       </div>
       {loading ? (
         <div className="pokelist__container">
