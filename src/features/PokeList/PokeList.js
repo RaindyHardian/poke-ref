@@ -17,6 +17,7 @@ const PokeList = () => {
   const [keyword, setKeyword] = useState("");
   const [searchNotFound, setSearchNotFound] = useState(false);
   const [searchErrMessage, setSearchErrMessage] = useState("");
+  const [searchLoading, setSearchLoading] = useState(false);
 
   useEffect(() => {
     const fetch = async () => {
@@ -53,13 +54,15 @@ const PokeList = () => {
       setSearchErrMessage("Please input the keyword");
       return;
     }
+    setSearchLoading(true);
     try {
       const { data, error } = await api.getPokemon(
-        `https://pokeapi.co/api/v2/pokemon/${keyword}`
+        `https://pokeapi.co/api/v2/pokemon/${keyword.toLowerCase()}`
       );
       if (error) {
         throw new Error(error);
       }
+      setSearchLoading(false);
       history.push("/pokemon/" + data.id);
     } catch (error) {
       if (error.message === "Request failed with status code 404") {
@@ -68,6 +71,7 @@ const PokeList = () => {
       } else {
         setError(error.message);
       }
+      setSearchLoading(false);
     }
   };
 
@@ -88,7 +92,18 @@ const PokeList = () => {
             Find
           </button>
         </form>
-        {searchNotFound ? <div className="pokelist__searchnotfound">{searchErrMessage}</div> : null}
+        {searchLoading ? (
+          <div className="pokelist__searchStatus" data-testid="search-loading">
+            Loading...
+          </div>
+        ) : searchNotFound ? (
+          <div
+            className="pokelist__searchStatus"
+            data-testid="search-error-msg"
+          >
+            {searchErrMessage}
+          </div>
+        ) : null}
       </div>
       {loading ? (
         <div className="pokelist__container">
