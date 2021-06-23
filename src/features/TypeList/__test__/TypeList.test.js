@@ -3,10 +3,26 @@ import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 import { Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
-import { screen, waitFor, cleanup } from "@testing-library/react";
+import { screen, waitFor, cleanup, fireEvent } from "@testing-library/react";
 
 import TypeList from "../TypeList";
 import api from "../../../api/api";
+
+const data = {
+  count: 2,
+  next: null,
+  previous: null,
+  results: [
+    {
+      name: "normal",
+      url: "https://pokeapi.co/api/v2/type/1/",
+    },
+    {
+      name: "fighting",
+      url: "https://pokeapi.co/api/v2/type/2/",
+    },
+  ],
+};
 
 let container = null;
 beforeEach(() => {
@@ -51,21 +67,7 @@ it("renders error in type list", async () => {
 it("renders type list", async () => {
   api.getAllTypes = jest.fn();
   api.getAllTypes.mockResolvedValueOnce({
-    data: {
-      count: 2,
-      next: null,
-      previous: null,
-      results: [
-        {
-          name: "normal",
-          url: "https://pokeapi.co/api/v2/type/1/",
-        },
-        {
-          name: "fighting",
-          url: "https://pokeapi.co/api/v2/type/2/",
-        },
-      ],
-    },
+    data: data,
   });
   const history = createMemoryHistory();
   const route = "/type";
@@ -81,6 +83,33 @@ it("renders type list", async () => {
   // Let's also make sure our Axios mock was called the way we expect
   expect(api.getAllTypes).toHaveBeenCalledTimes(1);
   await waitFor(() => screen.getByText("normal"));
-  expect(screen.getByText("normal")).toHaveTextContent("normal");
-  // screen.debug();
+  data.results.forEach((res) => {
+    expect(screen.getByText(res.name)).toBeInTheDocument;
+  });
+});
+
+it("should redirect when specific type is clicked", async () => {
+  api.getAllTypes = jest.fn();
+  api.getAllTypes.mockResolvedValueOnce({
+    data: data,
+  });
+  const history = createMemoryHistory();
+  act(() => {
+    render(
+      <Router history={history}>
+        <TypeList />
+      </Router>,
+      container
+    );
+  });
+  expect(api.getAllTypes).toHaveBeenCalledTimes(1);
+  await waitFor(() => screen.getByText("normal"));
+  data.results.forEach((res) => {
+    expect(screen.getByText(res.name)).toBeInTheDocument;
+  });
+  
+  const normal = screen.getByText("normal");
+  fireEvent.click(normal);
+  await waitFor(() => history.location.pathname);
+  expect(history.location.pathname).toBe("/type/normal");
 });

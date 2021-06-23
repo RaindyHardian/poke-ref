@@ -3,7 +3,7 @@ import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 import { Router, Route, MemoryRouter } from "react-router-dom";
 import { createMemoryHistory } from "history";
-import { screen, waitFor, cleanup } from "@testing-library/react";
+import { screen, waitFor, cleanup, fireEvent } from "@testing-library/react";
 
 import TypeDetails from "../TypeDetails";
 import api from "../../../api/api";
@@ -83,14 +83,29 @@ it("renders detailed pokemon info", async () => {
     );
   });
   expect(api.getType).toHaveBeenCalledTimes(1);
-  await waitFor(() => screen.getByTestId('poison'));
-  expect(screen.getByTestId('poison')).toHaveTextContent("poison type")
-  expect(screen.getByTestId("ddt-fairy")).toHaveTextContent("fairy");
-  expect(screen.getByTestId("hdt-ground")).toHaveTextContent("ground");
-  expect(screen.getByTestId("hdf-fighting")).toHaveTextContent("fighting");
-  expect(screen.getByTestId("ddf-psychic")).toHaveTextContent("psychic");
+  await waitFor(() => screen.getByTestId("poison"));
+  expect(screen.getByTestId("poison")).toHaveTextContent("poison type");
 
-  expect(screen.getByText("List of all poison pokemon")).toBeInTheDocument()
-  expect(screen.getByText("ivysaur")).toBeInTheDocument()
+  data.damage_relations.double_damage_to.forEach(({ name }) => {
+    expect(screen.getByTestId(`ddt-${name}`)).toHaveTextContent(name);
+  });
+
+  data.damage_relations.half_damage_to.forEach(({ name }) => {
+    expect(screen.getByTestId(`hdt-${name}`)).toHaveTextContent(name);
+  });
+
+  data.damage_relations.half_damage_from.forEach(({ name }) => {
+    expect(screen.getByTestId(`hdf-${name}`)).toHaveTextContent(name);
+  });
+
+  data.damage_relations.double_damage_from.forEach(({ name }) => {
+    expect(screen.getByTestId(`ddf-${name}`)).toHaveTextContent(name);
+  });
+
+  expect(screen.getByText("List of all poison pokemon")).toBeInTheDocument();
+
+  data.pokemon.forEach(({ pokemon: { name } }) => {
+    expect(screen.getByText(name)).toBeInTheDocument();
+  });
   // screen.debug();
 });

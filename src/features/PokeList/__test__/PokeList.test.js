@@ -60,29 +60,30 @@ it("renders error in pokemon list", async () => {
 });
 
 it("renders pokemon list", async () => {
+  const data = {
+    count: 1118,
+    next: "https://pokeapi.co/api/v2/pokemon?offset=18&limit=18",
+    previous: null,
+    results: [
+      {
+        name: "bulbasaur",
+        url: "https://pokeapi.co/api/v2/pokemon/1/",
+        id: 1,
+        sprite:
+          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+      },
+      {
+        name: "ivysaur",
+        url: "https://pokeapi.co/api/v2/pokemon/2/",
+        id: 2,
+        sprite:
+          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png",
+      },
+    ],
+  };
   api.getAllPokemon = jest.fn(); // 2nd method
   api.getAllPokemon.mockResolvedValueOnce({
-    data: {
-      count: 1118,
-      next: "https://pokeapi.co/api/v2/pokemon?offset=18&limit=18",
-      previous: null,
-      results: [
-        {
-          name: "bulbasaur",
-          url: "https://pokeapi.co/api/v2/pokemon/1/",
-          id: 1,
-          sprite:
-            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-        },
-        {
-          name: "ivysaur",
-          url: "https://pokeapi.co/api/v2/pokemon/2/",
-          id: 2,
-          sprite:
-            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png",
-        },
-      ],
-    },
+    data: data,
   });
   const history = createMemoryHistory();
   const route = "/";
@@ -98,7 +99,10 @@ it("renders pokemon list", async () => {
   // Let's also make sure our Axios mock was called the way we expect
   expect(api.getAllPokemon).toHaveBeenCalledTimes(1);
   await waitFor(() => screen.getByText("bulbasaur"));
-  expect(screen.getByText("bulbasaur")).toBeInTheDocument();
+  data.results.forEach((dt) => {
+    expect(screen.getByText(dt.name)).toBeInTheDocument();
+  });
+
   // screen.debug();
 });
 
@@ -106,7 +110,7 @@ it("should allow search form to be inputted", async () => {
   const history = createMemoryHistory();
   const route = "/";
   history.push(route);
-  act(() => {
+  await act(async () => {
     render(
       <Router history={history}>
         <PokeList />
@@ -128,7 +132,7 @@ it("should show error when search form submitted", async () => {
   const history = createMemoryHistory();
   const route = "/";
   history.push(route);
-  act(() => {
+  await act(async () => {
     render(
       <Router history={history}>
         <PokeList />
@@ -187,7 +191,7 @@ it("should successfully redirect when search form submitted", async () => {
   const history = createMemoryHistory();
   const route = "/";
   history.push(route);
-  act(() => {
+  await act(async () => {
     render(
       <Router history={history}>
         <PokeList />

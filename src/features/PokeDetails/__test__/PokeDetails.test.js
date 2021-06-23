@@ -3,7 +3,7 @@ import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 import { Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
-import { screen, waitFor, cleanup } from "@testing-library/react";
+import { screen, waitFor, cleanup, fireEvent } from "@testing-library/react";
 
 import PokeDetails from "../PokeDetails";
 import api from "../../../api/api";
@@ -79,15 +79,58 @@ it("renders detailed pokemon info", async () => {
   expect(api.getPokemon).toHaveBeenCalledTimes(1);
   await waitFor(() => screen.getByText("bulbasaur"));
   expect(screen.getByText("bulbasaur")).toBeInTheDocument();
-  expect(screen.getByTestId("type-grass")).toHaveTextContent("grass");
-  expect(screen.getByTestId("height")).toHaveTextContent("7 m");
-  expect(screen.getByTestId("weight")).toHaveTextContent("69 kg");
-  expect(screen.getByTestId("stat-hp")).toHaveTextContent(45); // stat
-  expect(screen.getByTestId("ability-chlorophyll")).toHaveTextContent(
-    "chlorophyll"
-  ); // ability
-  expect(screen.getByTestId("move-light-screen")).toHaveTextContent(
-    "light-screen"
-  ); // move
+  data.types.forEach(({ type }) => {
+    expect(screen.getByTestId(`type-${type.name}`)).toHaveTextContent(
+      type.name
+    );
+  });
+  expect(screen.getByTestId("height")).toHaveTextContent(`${data.height} m`);
+  expect(screen.getByTestId("weight")).toHaveTextContent(`${data.weight} kg`);
+  data.stats.forEach((stat) => {
+    expect(screen.getByTestId(`stat-${stat.stat.name}`)).toHaveTextContent(
+      stat.base_stat
+    ); // stat
+  });
+
+  data.abilities.forEach(({ ability }) => {
+    expect(screen.getByTestId(`ability-${ability.name}`)).toHaveTextContent(
+      ability.name
+    ); // ability
+  });
+
+  data.moves.forEach(({ move }) => {
+    expect(screen.getByTestId(`move-${move.name}`)).toHaveTextContent(
+      move.name
+    ); // move
+  });
+
   // screen.debug();
+});
+
+it("should redirect to types page when the pokemon type clicked", async () => {
+  api.getPokemon = jest.fn();
+  api.getPokemon.mockResolvedValueOnce({
+    data: data,
+  });
+  const history = createMemoryHistory();
+  await act(async () => {
+    render(
+      <Router history={history}>
+        <PokeDetails />
+      </Router>,
+      container
+    );
+  });
+
+  data.types.forEach(({ type }) => {
+    expect(screen.getByTestId(`type-${type.name}`)).toHaveTextContent(
+      type.name
+    );
+  });
+
+  const type = screen.getByTestId(`type-${data.types[0].type.name}`);
+  fireEvent.click(type);
+
+  await waitFor(() => history.location.pathname);
+  expect(history.location.pathname).toBe(`/type/${data.types[0].type.name}`);
 });

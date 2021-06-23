@@ -72,7 +72,7 @@ const TypeDetails = () => {
                   {type.damage_relations.double_damage_to.length > 0 ? (
                     type.damage_relations.double_damage_to.map(({ name }) => (
                       <div
-                        key={name}
+                        key={"ddt-" + name}
                         className={"typedetails__type " + typeColor(name)}
                       >
                         <Link
@@ -116,7 +116,7 @@ const TypeDetails = () => {
                   {type.damage_relations.half_damage_to.length > 0 ? (
                     type.damage_relations.half_damage_to.map(({ name }) => (
                       <div
-                        key={name}
+                        key={"hdt-" + name}
                         className={"typedetails__type " + typeColor(name)}
                       >
                         <Link
@@ -166,7 +166,7 @@ const TypeDetails = () => {
                   {type.damage_relations.half_damage_from.length > 0 ? (
                     type.damage_relations.half_damage_from.map(({ name }) => (
                       <div
-                        key={name}
+                        key={"hdf-" + name}
                         className={"typedetails__type " + typeColor(name)}
                       >
                         <Link
@@ -210,7 +210,7 @@ const TypeDetails = () => {
                   {type.damage_relations.double_damage_from.length > 0 ? (
                     type.damage_relations.double_damage_from.map(({ name }) => (
                       <div
-                        key={name}
+                        key={"ddf-" + name}
                         className={"typedetails__type " + typeColor(name)}
                       >
                         <Link
@@ -236,9 +236,9 @@ const TypeDetails = () => {
               List of all {id} pokemon
             </h2>
             <div className="typedetails__pokemon_list">
-              {type.pokemon.map((res) => (
+              {type.pokemon.map((res, idx) => (
                 <PokeListItem
-                  key={res.pokemon.id}
+                  key={idx}
                   id={res.pokemon.id}
                   sprite={res.pokemon.sprite}
                   name={res.pokemon.name}
